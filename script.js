@@ -2,17 +2,18 @@ let myLibrary = [];
 let bookDetails = document.getElementById("book-details-form");
 
 
-function Book(name, author, pages) {
+function Book(name, author, pages, readstatus) {
   this.name = name
   this.author = author
   this.pages = pages
+  Book.prototype.readstatus = readstatus
 }
 
 function addsomeBooksToLibrary() {
-  let book1 = new Book('bla', 'joel', 23)
-  let book2 = new Book('kla', 'koel', 34)
-  let book3 = new Book('One Hundred Years of Solitude', 'Some random dude', 899)
-  myLibrary.push(book1,book2, book3)
+  let book1 = new Book('bla', 'joel', 23, true)
+  let book2 = new Book('kla', 'koel', 34, true)
+  let book3 = new Book('One Hundred Years of Solitude', 'Some random dude', 899, true)
+  myLibrary.push(book1, book2, book3)
 }
 
 function display(library){
@@ -25,7 +26,17 @@ function createparagraph(){
 
 function webview(book, index){
   const div = document.createElement("div")
+  const nesteddiv = document.createElement("div")
   const span = document.createElement("span")
+  const input = document.createElement("INPUT")
+  const label = document.createElement("label")
+
+ 
+  input.id = `readstatus_${index}`
+  input.setAttribute("type", "checkbox")
+  label.htmlFor = `readstatus_${index}` 
+  label.innerHTML = 'Read'
+	
   div.className = 'book'
   div.dataset.index = index
   span.className = "book-delete"
@@ -35,10 +46,15 @@ function webview(book, index){
   p[1].innerHTML = "Author:&nbsp" + book.author
   p[2].innerHTML = "Pages:&nbsp" + book.pages
   span.innerHTML = "&times";
+  input.checked = book.readstatus
+	
   div.appendChild(span)
   div.appendChild(p[0])
   div.appendChild(p[1])
   div.appendChild(p[2])
+  nesteddiv.appendChild(input)
+  nesteddiv.appendChild(label)
+  div.appendChild(nesteddiv)
   document.body.appendChild(div)
   const plusbtn = document.getElementsByClassName('add-button')[0]
   document.body.insertBefore(div, plusbtn);
@@ -75,11 +91,12 @@ bookDetails.addEventListener("submit", (e) => {
   let title = document.getElementById("title");
   let author = document.getElementById("author");
   let pages = document.getElementById("pages");
+  let readstatus = document.getElementById("readstatus");
 
   if (author.value == "" || title.value == ""|| pages.value == "") {
     alert("Field can't be blank")
   } else {
-    let new_book = new Book(title.value, author.value, pages.value);
+    let new_book = new Book(title.value, author.value, pages.value, readstatus.checked);
     new_div = webview(new_book, myLibrary.length)
     myLibrary.push(new_book)
     modal.style.display = "none";
