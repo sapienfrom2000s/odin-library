@@ -16,6 +16,10 @@ body{
   border-radius: 5%;
 }
 
+.book{
+  min-width: 200px;
+}
+
 .add-button{
   justify-content: center;
   padding: 0;
