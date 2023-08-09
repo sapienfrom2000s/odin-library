@@ -2,17 +2,19 @@ let myLibrary = [];
 let bookDetails = document.getElementById("book-details-form");
 
 
-function Book(name, author, pages, readstatus) {
-  this.name = name
-  this.author = author
-  this.pages = pages
-  Book.prototype.readstatus = readstatus
+class Book{
+  constructor(name, author, pages, readstatus){
+ 	  this.name = name
+ 	  this.author = author
+ 	  this.pages = pages
+    this.readstatus = readstatus
+  }
 }
 
 function addsomeBooksToLibrary() {
-  let book1 = new Book('bla', 'joel', 23, true)
-  let book2 = new Book('kla', 'koel', 34, true)
-  let book3 = new Book('One Hundred Years of Solitude', 'Some random dude', 899, true)
+  let book1 = new Book('GNU Manual', 'GNU Team', 230, true)
+  let book2 = new Book('The Hobbit', 'JRR Tolkein', 400, true)
+  let book3 = new Book('1984', 'G. Orwell', 300, false)
   myLibrary.push(book1, book2, book3)
 }
 
