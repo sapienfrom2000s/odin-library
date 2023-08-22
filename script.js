@@ -117,6 +117,12 @@ function chargedeletebutton(e){
   });
 }
 
+function validateInput(input){
+  if(!input.checkValidity()){
+    input.style.border = '2px solid red';
+  }
+}
+
 addsomeBooksToLibrary()
 display(myLibrary)
 modalsetup()
